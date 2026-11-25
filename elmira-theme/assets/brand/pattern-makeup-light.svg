@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 260 260" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+<!-- رژ لب -->
+<g transform="translate(34 44) rotate(-18)">
+  <rect x="-9" y="10" width="18" height="26" rx="2.5"/><line x1="-9" y1="18" x2="9" y2="18"/>
+  <rect x="-6.5" y="0" width="13" height="10" rx="1"/><path d="M-5 0V-14L5-21V0"/>
+</g>
+<!-- قلم‌موی آرایش -->
+<g transform="translate(128 38) rotate(34)">
+  <path d="M0-30C8-21 8-7 3.5 0h-7C-8-7-8-21 0-30Z"/><path d="M-2-20C-3-14-2-7 0-3"/>
+  <rect x="-3.5" y="0" width="7" height="10" rx="1"/><path d="M-2.5 10-1.4 42h2.8L2.5 10"/>
+</g>
+<!-- پنکیک -->
+<g transform="translate(206 52)">
+  <circle r="17"/><circle r="11.5"/><path d="M-6-4a7 7 0 0 1 8-3.5"/><path d="M-4 17.5v3h8v-3"/>
+</g>
+<!-- ریمل -->
+<g transform="translate(58 132) rotate(-48)">
+  <rect x="-4.5" y="6" width="9" height="32" rx="3.5"/><line x1="0" y1="6" x2="0" y2="-30"/>
+  <path d="M-4.5-10 4.5-12M-5-15 5-17M-5-20 5-22M-4.5-25 4.5-27"/>
+</g>
+<!-- ادکلن -->
+<g transform="translate(146 128) rotate(10)">
+  <rect x="-14" y="-6" width="28" height="30" rx="7"/><rect x="-4" y="-12" width="8" height="6" rx="1"/>
+  <rect x="-6.5" y="-21" width="13" height="9" rx="2.5"/><path d="M-7 6h14M-5 11h10"/>
+</g>
+<!-- لاک ناخن -->
+<g transform="translate(218 150) rotate(-14)">
+  <path d="M-11 4h22v15a6 6 0 0 1-6 6h-10a6 6 0 0 1-6-6Z"/><rect x="-4" y="-2" width="8" height="6"/>
+  <rect x="-5" y="-26" width="10" height="24" rx="2.5"/>
+</g>
+<!-- لب -->
+<g transform="translate(108 206)">
+  <path d="M-19 0C-13-9-6-10 0-5 6-10 13-9 19 0 11 11-11 11-19 0Z"/><path d="M-19 0C-8 3.5 8 3.5 19 0"/>
+</g>
+<!-- مژه -->
+<g transform="translate(34 206)">
+  <path d="M-17 0C-9-9 9-9 17 0"/><path d="M-12.5-4.5-17-11M-6.5-7-9-14.5M0-7.5V-15M6.5-7 9-14.5M12.5-4.5 17-11"/>
+</g>
+<!-- آینهٔ دستی -->
+<g transform="translate(190 222) rotate(28)">
+  <ellipse cx="0" cy="-8" rx="11" ry="13"/><ellipse cx="0" cy="-8" rx="7" ry="9"/><path d="M-2 5v14h4V5"/>
+</g>
+<!-- درخشش -->
+<path d="M92 92l1.8-6 1.8 6 6 1.8-6 1.8-1.8 6-1.8-6-6-1.8Z"/>
+<path d="M180 100l1.3-4.4 1.3 4.4 4.4 1.3-4.4 1.3-1.3 4.4-1.3-4.4-4.4-1.3Z"/>
+<path d="M66 170l1.2-4 1.2 4 4 1.2-4 1.2-1.2 4-1.2-4-4-1.2Z"/>
+<circle cx="236" cy="96" r="1.6"/><circle cx="14" cy="98" r="1.6"/><circle cx="150" cy="176" r="1.6"/>
+</svg>
