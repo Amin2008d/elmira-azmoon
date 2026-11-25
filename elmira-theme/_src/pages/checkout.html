@@ -10,8 +10,8 @@
           <button type="button" class="link-arrow text-sm" onclick="eaToast('فرم افزودن آدرس این‌جا باز می‌شود','ph-map-pin-plus')"><i class="ph-light ph-plus" aria-hidden="true"></i> افزودن آدرس جدید</button>
         </div>
         <div class="grid md:grid-cols-2 gap-4 clear-both">
-          <label class="opt !items-start"><input type="radio" name="addr" required checked><span class="dot mt-1"></span><span class="flex-1 text-sm flex flex-col gap-1"><strong class="flex items-center justify-between">خانه <span class="text-xs text-copper-ink font-semibold">ویرایش</span></strong><span class="text-ink-2">[آدرس کامل — استان، شهر، خیابان، پلاک، واحد]</span><span class="text-xs text-ink-2">کد پستی: [۱۰ رقم] · تلفن: [۰۹۱۲xxxxxxx]</span></span></label>
-          <label class="opt !items-start"><input type="radio" name="addr"><span class="dot mt-1"></span><span class="flex-1 text-sm flex flex-col gap-1"><strong class="flex items-center justify-between">محل کار <span class="text-xs text-copper-ink font-semibold">ویرایش</span></strong><span class="text-ink-2">[آدرس کامل]</span></span></label>
+          <label class="opt !items-start"><input type="radio" name="addr" required checked><span class="dot mt-1"></span><span class="flex-1 text-sm flex flex-col gap-1"><strong class="flex items-center justify-between">خانه <span class="text-xs text-wine-ink font-semibold">ویرایش</span></strong><span class="text-ink-2">[آدرس کامل — استان، شهر، خیابان، پلاک، واحد]</span><span class="text-xs text-ink-2">کد پستی: [۱۰ رقم] · تلفن: [۰۹۱۲xxxxxxx]</span></span></label>
+          <label class="opt !items-start"><input type="radio" name="addr"><span class="dot mt-1"></span><span class="flex-1 text-sm flex flex-col gap-1"><strong class="flex items-center justify-between">محل کار <span class="text-xs text-wine-ink font-semibold">ویرایش</span></strong><span class="text-ink-2">[آدرس کامل]</span></span></label>
         </div>
       </fieldset>
 
@@ -19,9 +19,9 @@
       <fieldset data-reveal="up">
         <legend class="font-display text-3xl mb-5">روش ارسال</legend>
         <div class="grid gap-3">
-          <label class="opt"><input type="radio" name="ship" required checked><span class="dot"></span><i class="ph-light ph-moped text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">پیک تهران</strong><small class="text-ink-2">تحویل ۲۴ ساعته</small></span><b class="text-sm num">۶۵٬۰۰۰ ت</b></label>
-          <label class="opt"><input type="radio" name="ship"><span class="dot"></span><i class="ph-light ph-package text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">پست پیشتاز</strong><small class="text-ink-2">تحویل ۲ تا ۴ روز کاری</small></span><b class="text-sm num">۴۵٬۰۰۰ ت</b></label>
-          <label class="opt"><input type="radio" name="ship"><span class="dot"></span><i class="ph-light ph-storefront text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">تحویل حضوری در سالن</strong><small class="text-ink-2">[آدرس سالن] — همان روز</small></span><span class="tag tag-ok">رایگان</span></label>
+          <label class="opt"><input type="radio" name="ship" required checked><span class="dot"></span><i class="ph-light ph-moped text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">پیک تهران</strong><small class="text-ink-2">تحویل ۲۴ ساعته</small></span><b class="text-sm num">۶۵٬۰۰۰ ت</b></label>
+          <label class="opt"><input type="radio" name="ship"><span class="dot"></span><i class="ph-light ph-package text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">پست پیشتاز</strong><small class="text-ink-2">تحویل ۲ تا ۴ روز کاری</small></span><b class="text-sm num">۴۵٬۰۰۰ ت</b></label>
+          <label class="opt"><input type="radio" name="ship"><span class="dot"></span><i class="ph-light ph-storefront text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm"><strong class="block">تحویل حضوری در سالن</strong><small class="text-ink-2">[آدرس سالن] — همان روز</small></span><span class="tag tag-ok">رایگان</span></label>
         </div>
         <p class="label mt-6">زمان ترجیحی تحویل (اختیاری)</p>
         <div class="grid grid-cols-3 gap-2">
@@ -35,9 +35,9 @@
       <fieldset data-reveal="up">
         <legend class="font-display text-3xl mb-5">روش پرداخت</legend>
         <div class="grid gap-3">
-          <label class="opt"><input type="radio" name="pay" required checked><span class="dot"></span><i class="ph-light ph-credit-card text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">پرداخت آنلاین (درگاه بانکی)</span></label>
-          <label class="opt"><input type="radio" name="pay"><span class="dot"></span><i class="ph-light ph-money text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">پرداخت در محل (فقط تهران)</span></label>
-          <label class="opt"><input type="radio" name="pay"><span class="dot"></span><i class="ph-light ph-wallet text-2xl text-copper-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">کیف پول من <small class="font-normal text-ink-2">— موجودی: ۱۵۰٬۰۰۰ ت</small></span></label>
+          <label class="opt"><input type="radio" name="pay" required checked><span class="dot"></span><i class="ph-light ph-credit-card text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">پرداخت آنلاین (درگاه بانکی)</span></label>
+          <label class="opt"><input type="radio" name="pay"><span class="dot"></span><i class="ph-light ph-money text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">پرداخت در محل (فقط تهران)</span></label>
+          <label class="opt"><input type="radio" name="pay"><span class="dot"></span><i class="ph-light ph-wallet text-2xl text-wine-ink" aria-hidden="true"></i><span class="flex-1 text-sm font-semibold">کیف پول من <small class="font-normal text-ink-2">— موجودی: ۱۵۰٬۰۰۰ ت</small></span></label>
         </div>
         <label class="check mt-5"><input type="checkbox">نیاز به فاکتور رسمی دارم</label>
         <label class="block mt-5"><span class="label">توضیحات سفارش (اختیاری)</span><textarea class="textarea" placeholder="توضیحی برای ارسال یا بسته‌بندی"></textarea></label>
@@ -58,8 +58,8 @@
       </dl>
       <div class="border-t border-line pt-4 flex items-end justify-between"><span class="text-sm text-ink-2">مبلغ قابل پرداخت</span><strong class="font-display text-3xl num">۱٬۱۰۰٬۰۰۰ <small class="text-base text-ink-2">تومان</small></strong></div>
       <label class="check text-xs"><input type="checkbox" required>قوانین سایت را خوانده‌ام و می‌پذیرم.</label>
-      <button type="submit" class="btn btn-salmon btn-lg w-full">پرداخت و ثبت سفارش <i class="ph-light ph-lock-key" aria-hidden="true"></i></button>
-      <p class="flex items-center justify-center gap-2 text-xs text-ink-2"><i class="ph-light ph-shield-check text-base text-copper-ink" aria-hidden="true"></i>پرداخت امن از درگاه معتبر بانکی</p>
+      <button type="submit" class="btn btn-blush btn-lg w-full">پرداخت و ثبت سفارش <i class="ph-light ph-lock-key" aria-hidden="true"></i></button>
+      <p class="flex items-center justify-center gap-2 text-xs text-ink-2"><i class="ph-light ph-shield-check text-base text-wine-ink" aria-hidden="true"></i>پرداخت امن از درگاه معتبر بانکی</p>
     </aside>
   </form>
 

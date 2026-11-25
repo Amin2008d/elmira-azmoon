@@ -5,13 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{title}}</title>
 <meta name="description" content="{{desc}}">
-<meta name="theme-color" content="#2a3040">
+<meta name="theme-color" content="#7f264b">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="المیرا آزمون">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:image" content="assets/brand/og.jpg">
 <script>(function(){var t;try{t=localStorage.getItem('ea-theme');}catch(e){}var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.add(d?'dark':'light');})();</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Markazi+Text:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
 <link rel="stylesheet" href="assets/css/theme.css">
@@ -26,10 +32,10 @@
     --color-ink: var(--ink);
     --color-ink-2: var(--ink-2);
     --color-line: var(--line);
-    --color-night: var(--night);
-    --color-copper: var(--copper);
-    --color-copper-ink: var(--copper-ink);
-    --color-salmon: var(--salmon);
+    --color-deep: var(--deep);
+    --color-wine: var(--wine);
+    --color-wine-ink: var(--wine-ink);
+    --color-blush: var(--blush);
     --font-sans: "Vazirmatn", system-ui, sans-serif;
     --font-display: "Markazi Text", "Vazirmatn", serif;
   }
@@ -45,7 +51,7 @@
 <body class="{{body_class}}">
 
 <div class="curtain" aria-hidden="true">
-  <div class="curtain-mark"><i class="ph-light ph-flower-lotus"></i><span>المیرا آزمون</span><div class="curtain-bar"></div></div>
+  <div class="curtain-mark"><span class="logo-full"></span><div class="curtain-bar"></div></div>
 </div>
 <noscript><style>.curtain{display:none}</style></noscript>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>

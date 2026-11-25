@@ -50,3 +50,23 @@ desktop.ini
 # Misc
 *.bak
 *.tmp
+
+# Python (elmira-theme/_src/build.py)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Raw brand/design sources — large files, keep outside git
+/Elmira azmoun/
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xd
+
+# Business documents (not part of the site)
+*.docx
+*.doc
+~$*
+/proposal.html

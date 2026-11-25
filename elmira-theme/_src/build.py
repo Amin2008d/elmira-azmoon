@@ -6,7 +6,7 @@
 این اسکریپت head، سربرگ، فوتر و اجزای شناور مشترک را دورش می‌چیند و خروجی HTML ایستا
 را در ریشهٔ elmira-theme می‌نویسد.
 
-اجرا:  python3 _src/build.py
+اجرا:  python3 _src/build.py   (تصاویر نبوده در assets/img دانلود می‌شوند؛ --prune تصاویر بلااستفاده را پاک می‌کند)
 """
 import html
 import json
@@ -56,11 +56,54 @@ IMAGES = {
 }
 
 
+IMG_DIR = OUT / "assets" / "img"
+NEEDED = set()   # (name, w, h) هر اندازه‌ای که صفحه‌ها استفاده کرده‌اند
+
+
 def img_url(m):
+    """@@name,w,h@@ → مسیر محلی تصویر؛ فایل در پایان ساخت دانلود می‌شود اگر نباشد."""
     name, w, h = m.group(1), m.group(2), m.group(3)
     if name not in IMAGES:
         sys.exit(f"unknown image: {name}")
-    return f"https://images.unsplash.com/photo-{IMAGES[name]}?auto=format&amp;fit=crop&amp;w={w}&amp;h={h}&amp;q=70"
+    NEEDED.add((name, w, h))
+    return f"assets/img/{name}-{w}x{h}.webp"
+
+
+def fetch_images(prune=False):
+    """تصاویر لازم را (اگر نیستند) از Unsplash با همان برش و اندازه به WebP دانلود می‌کند."""
+    import concurrent.futures
+    import urllib.request
+
+    IMG_DIR.mkdir(parents=True, exist_ok=True)
+    missing = [n for n in sorted(NEEDED) if not (IMG_DIR / f"{n[0]}-{n[1]}x{n[2]}.webp").exists()]
+
+    def get(item):
+        name, w, h = item
+        url = f"https://images.unsplash.com/photo-{IMAGES[name]}?fm=webp&fit=crop&w={w}&h={h}&q=72"
+        req = urllib.request.Request(url, headers={"User-Agent": "elmira-theme-build"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            data = r.read()
+        if not data.startswith(b"RIFF"):
+            raise RuntimeError(f"{name} {w}x{h}: not a WebP response")
+        (IMG_DIR / f"{name}-{w}x{h}.webp").write_bytes(data)
+        return item
+
+    if missing:
+        print(f"downloading {len(missing)} images…")
+        with concurrent.futures.ThreadPoolExecutor(8) as ex:
+            for item in ex.map(get, missing):
+                print("  ✓", "-".join(item))
+
+    used = {f"{n}-{w}x{h}.webp" for n, w, h in NEEDED}
+    orphans = sorted(p.name for p in IMG_DIR.glob("*.webp") if p.name not in used)
+    if orphans and prune:
+        for o in orphans:
+            (IMG_DIR / o).unlink()
+        print(f"removed {len(orphans)} unused images")
+    elif orphans:
+        print(f"{len(orphans)} unused images in assets/img (run with --prune to delete)")
+    total = sum(p.stat().st_size for p in IMG_DIR.glob("*.webp"))
+    print(f"images: {len(used)} used, {total / 1024 / 1024:.1f} MB total")
 
 
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
@@ -79,7 +122,7 @@ def stars(n):
 
 # ---------- کامپوننت‌ها: {{name arg|arg|...}} ----------
 def c_product(img, name, cat, price, old="", tag="", star="5", d="0", key="", stock="1"):
-    tag_html = f'<span class="tag {"tag-mute" if stock == "0" else "tag-salmon"} absolute top-3 right-3 z-10">{tag}</span>' if tag else ""
+    tag_html = f'<span class="tag {"tag-mute" if stock == "0" else "tag-blush"} absolute top-3 right-3 z-10">{tag}</span>' if tag else ""
     old_html = f' <del class="text-ink-2 font-normal text-xs">{fa(old)}</del>' if old else ""
     if stock == "0":
         btn = f'<button type="button" class="btn btn-soft btn-sm absolute inset-x-3 bottom-3 z-10 transition-all duration-500 translate-y-[150%] group-hover:translate-y-0 [@media(hover:none)]:translate-y-0" onclick="eaToast(\'پس از موجود شدن خبرتان می‌کنیم\',\'ph-bell\')"><i class="ph-light ph-bell" aria-hidden="true"></i>اطلاع از موجودی</button>'
@@ -93,7 +136,7 @@ def c_product(img, name, cat, price, old="", tag="", star="5", d="0", key="", st
     {btn}
   </div>
   <div class="pt-4 text-center flex flex-col items-center gap-0.5">
-    <p class="text-[11px] font-bold text-copper-ink">{cat}</p>
+    <p class="text-[11px] font-bold text-wine-ink">{cat}</p>
     <h3 class="font-display text-xl leading-snug"><a href="product-single.html" class="link-u">{name}</a></h3>
     {stars(star)}
     <p class="text-sm font-semibold num">{fa(price)} تومان{old_html}</p>
@@ -106,8 +149,8 @@ def c_member(img, name, role, d="0"):
   <div class="relative zoom rounded-lg aspect-[4/5] img-ph mb-4">
     <img src="@@{img},500,620@@" alt="عکس نمونهٔ کارشناس" class="size-full object-cover saturate-[.85] transition duration-700 group-hover:saturate-100" loading="lazy" width="500" height="620">
     <div class="absolute inset-x-0 bottom-0 z-10 flex justify-center gap-2 pb-4 translate-y-full opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-      <a href="#" class="round-btn !size-10 bg-white !text-night !border-0 hover:!bg-salmon" aria-label="اینستاگرام {name}"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
-      <a href="gallery.html" class="round-btn !size-10 bg-white !text-night !border-0 hover:!bg-salmon" aria-label="نمونه‌کارهای {name}"><i class="ph-light ph-images" aria-hidden="true"></i></a>
+      <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام {name}"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
+      <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای {name}"><i class="ph-light ph-images" aria-hidden="true"></i></a>
     </div>
   </div>
   <figcaption class="leading-relaxed"><strong class="block font-display text-xl font-medium">{name}</strong><small class="text-xs text-ink-2">{role}</small></figcaption>
@@ -116,7 +159,7 @@ def c_member(img, name, role, d="0"):
 
 def c_review(name, text, star="5", sub=""):
     return f"""<figure class="snap-start flex-none w-[82vw] sm:w-[330px] flex gap-4 bg-card rounded-xl p-6 select-none">
-  <figcaption class="[writing-mode:vertical-rl] text-[11px] font-bold text-copper-ink pe-3 border-e border-line">{name}</figcaption>
+  <figcaption class="[writing-mode:vertical-rl] text-[11px] font-bold text-wine-ink pe-3 border-e border-line">{name}</figcaption>
   <div class="flex flex-col justify-between gap-4"><blockquote class="text-sm text-ink-2 leading-8">{text}</blockquote><div class="flex items-center justify-between gap-2">{stars(star)}<small class="text-[11px] text-ink-2">{sub}</small></div></div>
 </figure>"""
 
@@ -127,7 +170,7 @@ def c_post(img, cat, title, time, d="0", key="", excerpt=""):
   <div class="zoom rounded-xl aspect-[3/2] img-ph"><img src="@@{img},700,470@@" alt="" class="size-full object-cover" loading="lazy" width="700" height="470"></div>
   <div class="flex flex-col gap-2">
     <p class="flex items-center gap-3 text-xs"><span class="tag tag-soft">{cat}</span><span class="inline-flex items-center gap-1 text-ink-2"><i class="ph-light ph-clock" aria-hidden="true"></i><span>{time} مطالعه</span></span></p>
-    <h3 class="font-display text-2xl leading-snug transition group-hover:text-copper-ink">{title}</h3>
+    <h3 class="font-display text-2xl leading-snug transition group-hover:text-wine-ink">{title}</h3>
     {ex}
   </div>
 </a>"""
@@ -267,3 +310,4 @@ def build():
 
 if __name__ == "__main__":
     build()
+    fetch_images(prune="--prune" in sys.argv)

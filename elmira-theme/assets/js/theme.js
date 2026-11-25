@@ -154,14 +154,32 @@
   var revealables = $$('[data-reveal], .split, .progress, [data-count]');
   if ('IntersectionObserver' in window) {
     // عنصری که با clip-path صفر شروع می‌شود هیچ‌وقت «دیده» نمی‌شود؛ والدش را زیر نظر می‌گیریم
-    var proxy = new Map();
+    var proxy = new Map(), pending = new Map();
+    var revealNow = function (el) {
+      if (el.classList.contains('is-in')) return;
+      el.classList.add('is-in');
+      if (el.dataset.count) countUp(el);
+    };
+    // با اسکرول سریع یا پرش به یک لنگر، ناظر ممکن است عنصری را که در یک فریم رد شده نبیند؛
+    // هر عنصری که از بالای صفحه گذشته و هنوز نمایان نشده، همین‌جا نمایان می‌شود
+    var sweeping = false;
+    addEventListener('scroll', function () {
+      if (sweeping || !pending.size) return;
+      sweeping = true;
+      requestAnimationFrame(function () {
+        pending.forEach(function (el, target) {
+          if (target.getBoundingClientRect().bottom < 0) { revealNow(el); io.unobserve(target); pending.delete(target); }
+        });
+        sweeping = false;
+      });
+    }, { passive: true });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
         var el = proxy.get(en.target) || en.target;
-        el.classList.add('is-in');
-        if (el.dataset.count) countUp(el);
+        revealNow(el);
         io.unobserve(en.target);
+        pending.delete(en.target);
       });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
     // عناصر بالای صفحه بعد از کنار رفتن پرده وارد می‌شوند
@@ -173,6 +191,7 @@
           // چیزی که قبل از فعال شدن ناظر از بالای صفحه رد شده، فوراً نمایان شود
           if (target.getBoundingClientRect().bottom < 0) { el.classList.add('is-in'); if (el.dataset.count) countUp(el); return; }
           if (target !== el) proxy.set(target, el);
+          pending.set(target, el);
           io.observe(target);
         });
       }, 200);
