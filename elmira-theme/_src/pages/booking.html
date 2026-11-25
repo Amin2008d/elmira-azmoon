@@ -4,8 +4,8 @@
 <section class="py-14 md:py-20">
   <div class="wrap grid lg:grid-cols-[1fr_320px] gap-10 items-start">
     <div>
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8" data-reveal="up">
-        <div class="chips" data-filter="svc-grid" role="group" aria-label="دسته‌بندی خدمات">
+      <div class="flex flex-col gap-4 mb-8" data-reveal="up">
+        <div class="chips flex-1 min-w-0" data-filter="svc-grid" role="group" aria-label="دسته‌بندی خدمات">
           <button type="button" class="chip" data-cat="all" aria-pressed="true">همه خدمات</button>
           <button type="button" class="chip" data-cat="hair" aria-pressed="false">مو</button>
           <button type="button" class="chip" data-cat="skin" aria-pressed="false">پوست و صورت</button>
@@ -13,7 +13,7 @@
           <button type="button" class="chip" data-cat="bride" aria-pressed="false">آرایش عروس</button>
           <button type="button" class="chip" data-cat="wax" aria-pressed="false">اپیلاسیون</button>
         </div>
-        <label class="flex items-center gap-2 text-sm shrink-0"><span class="text-ink-2 whitespace-nowrap">مرتب‌سازی:</span>
+        <label class="flex items-center gap-2 text-sm shrink-0 self-end"><span class="text-ink-2 whitespace-nowrap">مرتب‌سازی:</span>
           <select class="select !min-h-10 !py-2 w-44" data-sort="svc-grid"><option value="pop">محبوب‌ترین</option><option value="asc">ارزان‌ترین</option><option value="desc">گران‌ترین</option></select>
         </label>
       </div>

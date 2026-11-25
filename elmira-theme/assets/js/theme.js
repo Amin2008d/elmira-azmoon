@@ -516,6 +516,35 @@
     addEventListener('pointermove', function (e) { if (!down) return; var d = e.clientX - sx; if (Math.abs(d) > 4) moved = true; track.scrollLeft = sl - d; });
     addEventListener('pointerup', function () { if (!down) return; down = false; track.style.scrollSnapType = ''; });
     track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+
+    // نوار پیشرفت (اختیاری): چه بخشی از ریل دیده شده
+    var bar = $('[data-progress]', wrap);
+    function progress() {
+      if (!bar) return;
+      var max = track.scrollWidth - track.clientWidth;
+      var seen = (track.clientWidth + Math.abs(track.scrollLeft)) / track.scrollWidth;
+      bar.style.setProperty('--p', max > 0 ? Math.min(1, seen) : 1);
+    }
+    track.addEventListener('scroll', progress, { passive: true }); addEventListener('resize', progress); progress();
+
+    // پخش خودکار (اختیاری): data-autoplay="میلی‌ثانیه". با hover، فوکوس یا لمس مکث می‌کند و فقط وقتی دیده می‌شود جلو می‌رود.
+    var delay = parseInt(wrap.dataset.autoplay || '0', 10);
+    if (!delay || reduce) return;
+    var paused = false, visible = false, timer;
+    function atEnd() { return Math.abs(track.scrollLeft) + track.clientWidth >= track.scrollWidth - 4; }
+    function tick() {
+      if (paused || !visible || down) return;
+      if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });
+      else track.scrollBy({ left: -step(), behavior: 'smooth' });
+    }
+    function restart() { clearInterval(timer); timer = setInterval(tick, delay); }
+    ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) { wrap.addEventListener(ev, function () { paused = true; }, { passive: true }); });
+    ['mouseleave', 'focusout'].forEach(function (ev) { wrap.addEventListener(ev, function () { paused = false; restart(); }); });
+    wrap.addEventListener('touchend', function () { setTimeout(function () { paused = false; restart(); }, 2500); }, { passive: true });
+    [prev, next].forEach(function (b) { b && b.addEventListener('click', restart); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(track);
+    else visible = true;
+    restart();
   });
 
   /* ---------- چرخش متن (نکته‌ها) ---------- */

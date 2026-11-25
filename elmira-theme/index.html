@@ -391,58 +391,68 @@
 </section>
 
 <!-- ================= تیم ================= -->
-<section class="py-24" aria-labelledby="team-title">
-  <div class="wrap">
-    <div class="sec-head mb-12" data-reveal="up">
-      <p class="kicker">کارشناسان</p><span class="sep" aria-hidden="true"></span>
-      <h2 id="team-title" class="font-display text-4xl">تیم سالن</h2>
+<section class="has-pattern py-24 overflow-hidden" aria-labelledby="team-title" data-carousel data-autoplay="3800">
+  <div class="wrap grid lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-center">
+    <div class="team-text flex flex-col items-start gap-5 lg:order-last" data-reveal="up">
+      <p class="kicker">کارشناسان</p>
+      <h2 id="team-title" class="font-display text-5xl md:text-6xl leading-tight">دست‌هایی که<br>زیبایی می‌سازند</h2>
+      <p class="max-w-[40ch] text-ink-2 leading-8">هر کدام از کارشناس‌های ما در یک تخصص کار می‌کنند و سال‌ها تجربه دارند؛ نوبتتان را مستقیم با کارشناس دلخواهتان بگیرید.</p>
+      <p class="flex flex-wrap items-center gap-3 text-sm">
+        <span class="stars bg-blush !text-deep rounded-full px-3">★★★★★</span>
+        <strong class="count" data-count="3000" data-prefix="+">+۳٬۰۰۰</strong> مشتری تا امروز <em class="not-italic text-xs text-ink-2">(نمونه)</em>
+      </p>
+      <div class="flex items-center gap-3 mt-2">
+        <button type="button" class="round-btn" data-prev aria-label="کارشناس قبلی"><i class="ph-light ph-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" class="round-btn" data-next aria-label="کارشناس بعدی"><i class="ph-light ph-arrow-left" aria-hidden="true"></i></button>
+        <span class="team-progress" aria-hidden="true"><span data-progress></span></span>
+      </div>
+      <a href="about.html" class="link-u inline-flex items-center gap-1 text-sm font-semibold text-wine-ink mt-1">آشنایی با همهٔ تیم <i class="ph-light ph-arrow-left" aria-hidden="true"></i></a>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 lg:gap-8">
-      <figure class="group text-center" data-reveal="up" style="--d:0">
-  <div class="relative zoom rounded-lg aspect-[4/5] img-ph mb-4">
-    <img src="assets/img/p_bun-500x620.webp" alt="عکس نمونهٔ کارشناس" class="size-full object-cover saturate-[.85] transition duration-700 group-hover:saturate-100" loading="lazy" width="500" height="620">
-    <div class="absolute inset-x-0 bottom-0 z-10 flex justify-center gap-2 pb-4 translate-y-full opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+
+    <div class="team-rail" data-reveal="up" style="--d:2">
+      <div class="team-track" data-track tabindex="0" aria-label="کارشناس‌های سالن؛ برای دیدن بقیه بکشید یا از دکمه‌ها استفاده کنید">
+        <figure class="team-card group">
+  <div class="team-photo zoom img-ph">
+    <img src="assets/img/p_bun-500x620.webp" alt="عکس نمونهٔ المیرا آزمون" width="500" height="620" loading="lazy" draggable="false">
+    <div class="team-social">
       <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام المیرا آزمون"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
       <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای المیرا آزمون"><i class="ph-light ph-images" aria-hidden="true"></i></a>
     </div>
   </div>
-  <figcaption class="leading-relaxed"><strong class="block font-display text-xl font-medium">المیرا آزمون</strong><small class="text-xs text-ink-2">مؤسس · میکاپ و پوست</small></figcaption>
+  <figcaption><strong>المیرا آزمون</strong><small>مؤسس · میکاپ و پوست</small></figcaption>
 </figure>
-      <figure class="group text-center" data-reveal="up" style="--d:1">
-  <div class="relative zoom rounded-lg aspect-[4/5] img-ph mb-4">
-    <img src="assets/img/p_laugh-500x620.webp" alt="عکس نمونهٔ کارشناس" class="size-full object-cover saturate-[.85] transition duration-700 group-hover:saturate-100" loading="lazy" width="500" height="620">
-    <div class="absolute inset-x-0 bottom-0 z-10 flex justify-center gap-2 pb-4 translate-y-full opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <figure class="team-card group">
+  <div class="team-photo zoom img-ph">
+    <img src="assets/img/p_laugh-500x620.webp" alt="عکس نمونهٔ سارا محمدی" width="500" height="620" loading="lazy" draggable="false">
+    <div class="team-social">
       <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام سارا محمدی"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
       <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای سارا محمدی"><i class="ph-light ph-images" aria-hidden="true"></i></a>
     </div>
   </div>
-  <figcaption class="leading-relaxed"><strong class="block font-display text-xl font-medium">سارا محمدی</strong><small class="text-xs text-ink-2">مو و رنگ</small></figcaption>
+  <figcaption><strong>سارا محمدی</strong><small>مو و رنگ</small></figcaption>
 </figure>
-      <figure class="group text-center" data-reveal="up" style="--d:2">
-  <div class="relative zoom rounded-lg aspect-[4/5] img-ph mb-4">
-    <img src="assets/img/p_red-500x620.webp" alt="عکس نمونهٔ کارشناس" class="size-full object-cover saturate-[.85] transition duration-700 group-hover:saturate-100" loading="lazy" width="500" height="620">
-    <div class="absolute inset-x-0 bottom-0 z-10 flex justify-center gap-2 pb-4 translate-y-full opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <figure class="team-card group">
+  <div class="team-photo zoom img-ph">
+    <img src="assets/img/p_red-500x620.webp" alt="عکس نمونهٔ نگین رضایی" width="500" height="620" loading="lazy" draggable="false">
+    <div class="team-social">
       <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام نگین رضایی"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
       <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای نگین رضایی"><i class="ph-light ph-images" aria-hidden="true"></i></a>
     </div>
   </div>
-  <figcaption class="leading-relaxed"><strong class="block font-display text-xl font-medium">نگین رضایی</strong><small class="text-xs text-ink-2">ناخن و مژه</small></figcaption>
+  <figcaption><strong>نگین رضایی</strong><small>ناخن و مژه</small></figcaption>
 </figure>
-      <figure class="group text-center" data-reveal="up" style="--d:3">
-  <div class="relative zoom rounded-lg aspect-[4/5] img-ph mb-4">
-    <img src="assets/img/p_stripe-500x620.webp" alt="عکس نمونهٔ کارشناس" class="size-full object-cover saturate-[.85] transition duration-700 group-hover:saturate-100" loading="lazy" width="500" height="620">
-    <div class="absolute inset-x-0 bottom-0 z-10 flex justify-center gap-2 pb-4 translate-y-full opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <figure class="team-card group">
+  <div class="team-photo zoom img-ph">
+    <img src="assets/img/p_stripe-500x620.webp" alt="عکس نمونهٔ [نام کارشناس]" width="500" height="620" loading="lazy" draggable="false">
+    <div class="team-social">
       <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام [نام کارشناس]"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
       <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای [نام کارشناس]"><i class="ph-light ph-images" aria-hidden="true"></i></a>
     </div>
   </div>
-  <figcaption class="leading-relaxed"><strong class="block font-display text-xl font-medium">[نام کارشناس]</strong><small class="text-xs text-ink-2">مراقبت پوست</small></figcaption>
+  <figcaption><strong>[نام کارشناس]</strong><small>مراقبت پوست</small></figcaption>
 </figure>
+      </div>
     </div>
-    <p class="flex flex-wrap items-center justify-center gap-3 mt-12 text-sm text-center" data-reveal="up">
-      <span class="stars bg-blush !text-deep rounded-full px-3">★★★★★</span>
-      <strong class="count" data-count="3000" data-prefix="+">+۳٬۰۰۰</strong> مشتری تا امروز به سالن آمده‌اند <em class="not-italic text-xs text-ink-2">(عدد و عکس‌ها نمونه‌اند)</em>
-    </p>
   </div>
 </section>
 
@@ -535,20 +545,6 @@
 </section>
 
 </main>
-<!-- نوار متحرک خدمات -->
-<div class="border-y border-line py-7 md:py-9 overflow-hidden" aria-hidden="true">
-  <div class="marquee" data-marquee>
-    <div class="marquee-track font-display text-4xl md:text-6xl leading-none">
-      <span class="marquee-item">میکاپ عروس <i class="ph-fill ph-sparkle"></i></span>
-      <span class="marquee-item outline-text-dark">رنگ و مش مو <i class="ph-fill ph-sparkle"></i></span>
-      <span class="marquee-item">پاکسازی پوست <i class="ph-fill ph-sparkle"></i></span>
-      <span class="marquee-item outline-text-dark">کاشت ناخن <i class="ph-fill ph-sparkle"></i></span>
-      <span class="marquee-item">کراتینه <i class="ph-fill ph-sparkle"></i></span>
-      <span class="marquee-item outline-text-dark">لیفت مژه <i class="ph-fill ph-sparkle"></i></span>
-    </div>
-  </div>
-</div>
-
 <footer class="grad">
   <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="pattern-makeup" aria-hidden="true"></div>

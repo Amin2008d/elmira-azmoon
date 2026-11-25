@@ -157,6 +157,19 @@ def c_member(img, name, role, d="0"):
 </figure>"""
 
 
+def c_teamcard(img, name, role):
+    return f"""<figure class="team-card group">
+  <div class="team-photo zoom img-ph">
+    <img src="@@{img},500,620@@" alt="عکس نمونهٔ {name}" width="500" height="620" loading="lazy" draggable="false">
+    <div class="team-social">
+      <a href="#" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="اینستاگرام {name}"><i class="ph-light ph-instagram-logo" aria-hidden="true"></i></a>
+      <a href="gallery.html" class="round-btn !size-10 bg-white !text-deep !border-0 hover:!bg-blush" aria-label="نمونه‌کارهای {name}"><i class="ph-light ph-images" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <figcaption><strong>{name}</strong><small>{role}</small></figcaption>
+</figure>"""
+
+
 def c_review(name, text, star="5", sub=""):
     return f"""<figure class="snap-start flex-none w-[82vw] sm:w-[330px] flex gap-4 bg-card rounded-xl p-6 select-none">
   <figcaption class="[writing-mode:vertical-rl] text-[11px] font-bold text-wine-ink pe-3 border-e border-line">{name}</figcaption>
@@ -231,7 +244,7 @@ def c_steps(kind, current):
 
 COMPONENTS = {
     "steps": c_steps,
-    "product": c_product, "member": c_member, "review": c_review, "post": c_post,
+    "product": c_product, "member": c_member, "teamcard": c_teamcard, "review": c_review, "post": c_post,
     "course": c_course, "service": c_service, "stars": stars,
 }
 
@@ -243,27 +256,74 @@ def expand(m):
     return COMPONENTS[name](*[a.strip() for a in args.split("|")])
 
 
-def page_hero(h):
+# تصویر، آیکون، کارت شیشه‌ای و دکمهٔ هیروی هر صفحهٔ داخلی
+# (عکس اصلی، عکس گرد، آیکون، تیتر کارت، زیرنویس کارت، دکمه: (متن، لینک، رزرو؟) یا None)
+PAGE_VISUAL = {
+    "about":          ("mirror",          "p_bun",       "ph-heart",           "از ۲۰۲۴ کنار شما",    "سالن · فروشگاه · آموزشگاه", ("رزرو نوبت", "#", True)),
+    "academy":        ("brushes",         "eye_makeup",  "ph-graduation-cap",  "کلاس‌های حضوری",      "تمرین روی مدل واقعی",       ("مشاوره و ثبت‌نام", "enroll.html", False)),
+    "account":        ("skinglow",        "cream",       "ph-user-circle",     "پنل کاربری",          "سفارش‌ها و دوره‌ها",         None),
+    "blog":           ("oil",             "dropper",     "ph-book-open-text",  "مجلهٔ زیبایی",        "نکته از کارشناس‌های سالن",   None),
+    "blog-single":    ("facial",          "cream_swipe", "ph-pen-nib",         "نوشتهٔ کارشناس سالن", "مراقبت پوست",               None),
+    "booking":        ("balayage",        "nailart",     "ph-scissors",        "مو، پوست و ناخن",     "رزرو آنلاین نوبت",          ("رزرو نوبت", "#", True)),
+    "cart":           ("cosmetics",       "green_jars",  "ph-truck",           "ارسال رایگان",        "برای خرید بالای ۱ میلیون تومان", None),
+    "checkout":       ("cream",           "serum",       "ph-lock-key",        "پرداخت امن",          "درگاه بانکی",               None),
+    "contact":        ("interior_chairs", "mirror",      "ph-clock",           "شنبه تا چهارشنبه",    "۹ صبح تا ۸ شب",             None),
+    "course-single":  ("face_makeup",     "brushes",     "ph-calendar-check",  "۱۲ جلسهٔ حضوری",      "تمرین روی مدل واقعی",       ("ثبت‌نام در دوره", "enroll.html", False)),
+    "enroll":         ("palette",         "brushes",     "ph-certificate",     "ثبت‌نام آنلاین",      "در سه مرحلهٔ کوتاه",        None),
+    "gallery":        ("curly_pink",      "redhair",     "ph-images",          "نمونه‌کار واقعی",     "از کار روزانهٔ سالن",        ("رزرو نوبت", "#", True)),
+    "product-single": ("serum",           "dropper",     "ph-seal-check",      "انتخاب کارشناس",      "همان محصول سالن",           None),
+    "service-single": ("eye_makeup",      "face_makeup", "ph-sparkle",         "میکاپ عروس",          "با مشاورهٔ پیش از مراسم",    ("رزرو همین خدمت", "#", True)),
+    "shop":           ("green_jars",      "serum",       "ph-storefront",      "محصولات منتخب",       "همان‌هایی که سالن استفاده می‌کند", None),
+}
+
+
+def page_hero(h, slug=""):
     crumbs = h.get("crumbs", [])
     parts = []
     for i, (label, href) in enumerate(crumbs):
         if i:
-            parts.append('<span aria-hidden="true">/</span>')
+            parts.append('<i class="ph-light ph-caret-left" aria-hidden="true"></i>')
         if href:
             parts.append(f'<a href="{href}" class="link-u">{label}</a>')
         else:
             parts.append(f'<span aria-current="page" class="text-white">{label}</span>')
     outline = h.get("outline", "")
-    sub = f'<p class="mt-5 max-w-xl text-white/75" data-reveal="up" style="--d:3">{h["sub"]}</p>' if h.get("sub") else ""
+    sub = f'<p class="mt-5 max-w-xl text-white/75 leading-8" data-reveal="up" style="--d:3">{h["sub"]}</p>' if h.get("sub") else ""
+
+    vis = PAGE_VISUAL.get(slug)
+    visual, cta = "", ""
+    if vis:
+        main, orb, icon, chip_t, chip_s, action = vis
+        if action:
+            label, href, booking = action
+            attr = ' data-booking' if booking else ''
+            cta = f"""<div class="flex flex-wrap items-center gap-x-8 gap-y-4 mt-8" data-reveal="up" style="--d:4">
+      <a href="{href}"{attr} class="btn btn-blush" data-magnetic>{label} <i class="ph-light ph-arrow-up-left" aria-hidden="true"></i></a>
+      <a href="contact.html" class="hero-link"><span class="hero-link-icon"><i class="ph-light ph-phone" aria-hidden="true"></i></span><span class="hero-link-text">مشاوره و تماس</span></a>
+    </div>"""
+        visual = f"""
+    <div class="ph-visual" data-reveal="up" style="--d:2" aria-hidden="true">
+      <span class="ph-arch-line"></span>
+      <div class="ph-arch"><img src="@@{main},700,875@@" alt="" width="700" height="875" fetchpriority="high"></div>
+      <div class="badge ph-badge text-white/80 [&>.logo-mark]:text-blush"><svg class="badge-spin" viewBox="0 0 200 200"><defs><path id="phb" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><text><textPath href="#phb" textLength="440">ELMIRA AZMOUN • WHERE GRACE FINDS ITS REFLECTION •</textPath></text></svg><span class="logo-mark"></span></div>
+      <span class="ph-orb"><svg class="hero-orb-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg><img src="@@{orb},200,200@@" alt="" width="200" height="200" loading="lazy"></span>
+      <div class="hero-chip ph-chip"><span class="salon-chip-icon"><i class="ph-light {icon}"></i></span><div class="leading-tight"><b class="block text-sm">{chip_t}</b><small class="text-white/65 text-[11px]">{chip_s}</small></div></div>
+      <i class="ph-fill ph-sparkle hero-twinkle" style="--t:0;top:4%;right:2%"></i>
+      <i class="ph-fill ph-sparkle hero-twinkle" style="--t:1;bottom:22%;right:-2%;font-size:15px"></i>
+    </div>"""
     return f"""
-<section class="grad spotlight page-hero" data-hero>
+<section class="grad spotlight page-hero{' has-visual' if vis else ''}" data-hero>
   <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="pattern-makeup" aria-hidden="true"></div>
   <span class="outline-text font-display absolute -bottom-6 md:-bottom-12 left-2 md:left-8 text-[26vw] md:text-[15rem] leading-none pointer-events-none select-none" aria-hidden="true" data-parallax="-.12">{outline}</span>
-  <div class="wrap relative">
-    <nav class="crumbs" aria-label="مسیر صفحه" data-reveal="up">{''.join(parts)}</nav>
-    <h1 class="font-display text-5xl md:text-7xl leading-[1.05] mt-4" data-split>{h['title']}</h1>
-    {sub}
-    {h.get('extra', '')}
+  <div class="wrap relative ph-grid">
+    <div class="ph-text">
+      <nav class="crumbs ph-crumbs" aria-label="مسیر صفحه" data-reveal="up">{''.join(parts)}</nav>
+      <h1 class="font-display text-5xl md:text-7xl leading-[1.05] mt-6" data-split>{h['title']}</h1>
+      {sub}
+      {h.get('extra', '')}
+      {cta}
+    </div>{visual}
   </div>
 </section>
 """
@@ -289,7 +349,7 @@ def build():
         if meta.get("nav"):
             header = header.replace(f'data-nav="{meta["nav"]}"', f'data-nav="{meta["nav"]}" aria-current="page"')
 
-        hero = page_hero(meta["hero"]) if meta.get("hero") else ""
+        hero = page_hero(meta["hero"], p.stem) if meta.get("hero") else ""
         main = f'<main id="main">\n{hero}\n{body}\n</main>\n'
 
         if layout == "bare":

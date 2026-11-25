@@ -258,6 +258,47 @@ html.dark .pattern-makeup.is-dark { background-image: url("../brand/pattern-make
 .salon-chip-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; font-size: 20px; color: var(--blush); background: rgb(255 255 255 / .08); }
 @media (width < 640px) { .salon-chip-a { top: 20%; left: 0; } .salon-chip-b { right: 0; bottom: 2%; } .salon-word { top: -2%; } }
 
+/* ---------- تیم سالن: متن یک طرف، ریل کارت‌ها طرف دیگر (حداکثر سه کارت در دید) ---------- */
+.team-rail { position: relative; min-width: 0; }
+.team-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; padding-bottom: 4px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%); mask-image: linear-gradient(to right, transparent 0, #000 12%); }
+.team-track::-webkit-scrollbar { display: none; }
+.team-track:active { cursor: grabbing; }
+.team-track:focus-visible { outline: 2px solid var(--wine-ink); outline-offset: 6px; border-radius: var(--r); }
+.team-card { flex: 0 0 clamp(210px, 72vw, 270px); scroll-snap-align: start; user-select: none; }
+@media (width >= 1024px) { .team-card { flex-basis: calc((100% - 40px) / 2.4); } }
+.team-photo { position: relative; aspect-ratio: 4 / 5; border-radius: 22px; background: linear-gradient(180deg, var(--tint), var(--bg-2)); }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.team-social { position: absolute; inset-inline: 0; bottom: 0; z-index: 2; display: flex; justify-content: center; gap: 8px; padding-bottom: 16px;
+  transform: translateY(100%); opacity: 0; transition: transform .5s var(--ease-out), opacity .4s var(--ease); }
+.team-card:hover .team-social, .team-card:focus-within .team-social { transform: none; opacity: 1; }
+.team-card figcaption { padding: 14px 4px 0; line-height: 1.5; }
+.team-card figcaption strong { display: block; font-family: "Markazi Text", serif; font-size: 22px; font-weight: 600; }
+.team-card figcaption small { font-size: 12px; color: var(--ink-2); }
+.team-progress { position: relative; width: 110px; height: 2px; margin-inline-start: 8px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.team-progress span { position: absolute; inset-block: 0; right: 0; width: 100%; background: var(--wine-ink); transform-origin: right; transform: scaleX(var(--p, .25)); transition: transform .4s var(--ease-out); }
+
+/* ---------- هیروی صفحه‌های داخلی: متن + ترکیب تصویر (طاق، عکس گرد، نشان، کارت شیشه‌ای) ---------- */
+.ph-grid { display: grid; gap: 48px; align-items: center; }
+@media (width >= 768px) { .page-hero.has-visual .ph-grid { grid-template-columns: 1.25fr 1fr; } }
+.ph-text { position: relative; z-index: 2; min-width: 0; }
+.page-hero .ph-crumbs { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .14);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.ph-crumbs i { font-size: 11px; opacity: .5; }
+.ph-visual { position: relative; display: none; justify-self: center; width: min(100%, 420px); height: 400px; }
+@media (width >= 768px) { .ph-visual { display: block; } }
+@media (width >= 1024px) { .ph-visual { height: 440px; } }
+.ph-arch-line { position: absolute; top: -5%; bottom: 7%; left: 8%; right: 14%; border: 1px solid rgb(210 161 161 / .45); border-radius: 999px 999px 34px 34px; }
+.ph-arch { position: absolute; inset: 0 6% 0 16%; overflow: hidden; border-radius: 999px 999px 28px 28px; background: rgb(255 255 255 / .06); box-shadow: 0 50px 90px -40px rgb(0 0 0 / .6); }
+.ph-arch img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease-out); }
+.ph-visual:hover .ph-arch img { transform: scale(1.05); }
+.ph-arch::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(to top, rgb(42 11 27 / .5), transparent); }
+.ph-badge { top: 6%; left: 0; z-index: 3; width: 6.5rem; height: 6.5rem; }
+.ph-orb { position: absolute; bottom: -3%; left: 4%; z-index: 3; display: grid; place-items: center; width: 116px; height: 116px; }
+.ph-orb img { width: 88px; height: 88px; border-radius: 999px; object-fit: cover; border: 3px solid rgb(255 255 255 / .9); box-shadow: 0 18px 36px -16px rgb(0 0 0 / .6); }
+.ph-chip { top: 46%; right: -6%; }
+@media (prefers-reduced-motion: reduce) { .ph-orb .hero-orb-ring { animation: none; } }
+
 /* ---------- لوگوی برند ----------
    فایل‌های assets/brand به‌صورت ماسک استفاده می‌شوند؛ رنگ لوگو همان currentColor والد است
    تا در حالت روشن/تیره و روی گرادیان خودش هماهنگ شود. هنگام hover یک درخشش از رویش می‌گذرد. */
@@ -459,7 +500,7 @@ html.dark .btn-dark { background: #f5eced; color: var(--deep); }
 .opt.is-off { opacity: .55; cursor: not-allowed; }
 
 /* چیپ‌های فیلتر */
-.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 2px; }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
   flex: none; padding: 8px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);

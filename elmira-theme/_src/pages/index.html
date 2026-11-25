@@ -247,22 +247,32 @@
 </section>
 
 <!-- ================= تیم ================= -->
-<section class="py-24" aria-labelledby="team-title">
-  <div class="wrap">
-    <div class="sec-head mb-12" data-reveal="up">
-      <p class="kicker">کارشناسان</p><span class="sep" aria-hidden="true"></span>
-      <h2 id="team-title" class="font-display text-4xl">تیم سالن</h2>
+<section class="has-pattern py-24 overflow-hidden" aria-labelledby="team-title" data-carousel data-autoplay="3800">
+  <div class="wrap grid lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-center">
+    <div class="team-text flex flex-col items-start gap-5 lg:order-last" data-reveal="up">
+      <p class="kicker">کارشناسان</p>
+      <h2 id="team-title" class="font-display text-5xl md:text-6xl leading-tight">دست‌هایی که<br>زیبایی می‌سازند</h2>
+      <p class="max-w-[40ch] text-ink-2 leading-8">هر کدام از کارشناس‌های ما در یک تخصص کار می‌کنند و سال‌ها تجربه دارند؛ نوبتتان را مستقیم با کارشناس دلخواهتان بگیرید.</p>
+      <p class="flex flex-wrap items-center gap-3 text-sm">
+        <span class="stars bg-blush !text-deep rounded-full px-3">★★★★★</span>
+        <strong class="count" data-count="3000" data-prefix="+">+۳٬۰۰۰</strong> مشتری تا امروز <em class="not-italic text-xs text-ink-2">(نمونه)</em>
+      </p>
+      <div class="flex items-center gap-3 mt-2">
+        <button type="button" class="round-btn" data-prev aria-label="کارشناس قبلی"><i class="ph-light ph-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" class="round-btn" data-next aria-label="کارشناس بعدی"><i class="ph-light ph-arrow-left" aria-hidden="true"></i></button>
+        <span class="team-progress" aria-hidden="true"><span data-progress></span></span>
+      </div>
+      <a href="about.html" class="link-u inline-flex items-center gap-1 text-sm font-semibold text-wine-ink mt-1">آشنایی با همهٔ تیم <i class="ph-light ph-arrow-left" aria-hidden="true"></i></a>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 lg:gap-8">
-      {{member p_bun|المیرا آزمون|مؤسس · میکاپ و پوست|0}}
-      {{member p_laugh|سارا محمدی|مو و رنگ|1}}
-      {{member p_red|نگین رضایی|ناخن و مژه|2}}
-      {{member p_stripe|[نام کارشناس]|مراقبت پوست|3}}
+
+    <div class="team-rail" data-reveal="up" style="--d:2">
+      <div class="team-track" data-track tabindex="0" aria-label="کارشناس‌های سالن؛ برای دیدن بقیه بکشید یا از دکمه‌ها استفاده کنید">
+        {{teamcard p_bun|المیرا آزمون|مؤسس · میکاپ و پوست}}
+        {{teamcard p_laugh|سارا محمدی|مو و رنگ}}
+        {{teamcard p_red|نگین رضایی|ناخن و مژه}}
+        {{teamcard p_stripe|[نام کارشناس]|مراقبت پوست}}
+      </div>
     </div>
-    <p class="flex flex-wrap items-center justify-center gap-3 mt-12 text-sm text-center" data-reveal="up">
-      <span class="stars bg-blush !text-deep rounded-full px-3">★★★★★</span>
-      <strong class="count" data-count="3000" data-prefix="+">+۳٬۰۰۰</strong> مشتری تا امروز به سالن آمده‌اند <em class="not-italic text-xs text-ink-2">(عدد و عکس‌ها نمونه‌اند)</em>
-    </p>
   </div>
 </section>
 
