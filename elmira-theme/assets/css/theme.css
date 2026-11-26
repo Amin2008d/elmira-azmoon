@@ -299,6 +299,57 @@ html.dark .pattern-makeup.is-dark { background-image: url("../brand/pattern-make
 .ph-chip { top: 46%; right: -6%; }
 @media (prefers-reduced-motion: reduce) { .ph-orb .hero-orb-ring { animation: none; } }
 
+/* ---------- فوتر ---------- */
+.site-footer { position: relative; font-size: 14px; }
+/* کارت دعوت به رزرو */
+.ft-cta { position: relative; display: grid; gap: 32px; align-items: center; padding: 28px 24px; border-radius: 28px; overflow: hidden;
+  background: rgb(255 255 255 / .06); border: 1px solid rgb(255 255 255 / .13); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+@media (width >= 768px) { .ft-cta { grid-template-columns: 1.4fr 1fr; padding: 36px 48px; } }
+.ft-cta-visual { position: relative; display: none; height: 250px; align-self: end; margin-bottom: -36px; }
+@media (width >= 768px) { .ft-cta-visual { display: block; } }
+.ft-cta-arch { position: absolute; inset: 0 22% 0 18%; overflow: hidden; border-radius: 999px 999px 0 0; box-shadow: 0 40px 70px -30px rgb(0 0 0 / .6); }
+.ft-cta-arch img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.ft-cta-orb { position: absolute; bottom: 4%; left: 4%; display: grid; place-items: center; width: 92px; height: 92px; border-radius: 999px; border: 1px dashed rgb(210 161 161 / .7); }
+.ft-cta-orb img { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; border: 3px solid rgb(255 255 255 / .9); }
+/* ستون‌ها */
+.ft-grid { position: relative; z-index: 1; display: grid; gap: 28px 24px; padding-top: 48px; padding-bottom: 36px; grid-template-columns: 1fr 1fr; }
+.ft-brand, .ft-insta, .ft-contact { grid-column: 1 / -1; }
+@media (width >= 768px) { .ft-grid { grid-template-columns: 1.2fr 1fr 1.1fr 1.15fr; } .ft-brand, .ft-contact { grid-column: auto; } .ft-insta { grid-column: 1 / -1; } .ft-insta .ft-insta-grid { grid-template-columns: repeat(6, 1fr); max-width: 640px; } }
+@media (width >= 1100px) { .ft-grid { grid-template-columns: 1.5fr 1fr 1.1fr 1.2fr 1.3fr; } .ft-brand, .ft-insta { grid-column: auto; } .ft-insta .ft-insta-grid { grid-template-columns: repeat(3, 1fr); max-width: 300px; } }
+.ft-brand { display: flex; flex-direction: column; gap: 14px; }
+.ft-social { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 999px; font-size: 19px; border: 1px solid rgb(255 255 255 / .25); transition: background-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease-out); }
+.ft-social:hover { background: #fff; color: var(--deep); transform: translateY(-3px); }
+.ft-strip { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 20px; padding-left: 76px; border-top: 1px solid rgb(255 255 255 / .12); }
+.ft-news { position: relative; display: flex; flex-direction: column; gap: 6px; width: min(100%, 380px); }
+@media (width >= 768px) { .ft-news { flex-direction: row; align-items: center; gap: 14px; width: min(100%, 470px); } .ft-news label { white-space: nowrap; } .ft-news-row { flex: 1; } .ft-news-ok { position: absolute; margin-top: 52px; } }
+.ft-news-row { display: flex; align-items: center; padding: 4px; border-radius: 999px; background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .16); transition: border-color .3s var(--ease); }
+.ft-news-row:focus-within { border-color: var(--blush); }
+.ft-news input { flex: 1; min-width: 0; padding: 8px 14px; background: none; border: 0; outline: none; color: #fff; font-size: 13px; text-align: right; }
+.ft-news input::placeholder { color: rgb(255 255 255 / .5); }
+.ft-news button { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 999px; background: var(--blush); color: var(--deep); font-size: 17px; transition: transform .3s var(--ease-out); }
+.ft-news button:hover { transform: rotate(-12deg) scale(1.06); }
+.ft-news-ok { display: none; color: var(--blush-soft); }
+.ft-news.is-done .ft-news-ok { display: block; }
+.ft-col { display: flex; flex-direction: column; gap: 11px; }
+.ft-col h2 { position: relative; margin-bottom: 8px; padding-bottom: 12px; font-size: 13px; font-weight: 700; color: var(--blush); }
+.ft-col h2::after { content: ""; position: absolute; right: 0; bottom: 0; width: 28px; height: 1px; background: rgb(210 161 161 / .6); }
+.ft-col > a { width: fit-content; color: rgb(255 255 255 / .72); transition: color .25s var(--ease), transform .3s var(--ease-out); }
+.ft-col > a::before { content: "—"; display: inline-block; width: 0; overflow: hidden; vertical-align: bottom; color: var(--blush); transition: width .3s var(--ease-out); }
+.ft-col > a:hover { color: #fff; transform: translateX(-4px); }
+.ft-col > a:hover::before { width: 1.2em; }
+.ft-contact p { display: flex; align-items: flex-start; gap: 10px; color: rgb(255 255 255 / .78); line-height: 1.6; }
+.ft-ic { display: grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 10px; font-size: 16px; color: var(--blush); background: rgb(255 255 255 / .08); }
+.ft-insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; max-width: 640px; }
+.ft-insta-grid a { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 10px; }
+.ft-insta-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out), filter .4s var(--ease); filter: saturate(.85); }
+.ft-insta-grid a:hover img { transform: scale(1.1); filter: saturate(1.05); }
+/* نام بزرگ و نوار پایانی */
+.ft-word { position: absolute; inset-inline: 0; bottom: 56px; z-index: 0; padding-inline: 1rem; overflow: hidden; text-align: center; white-space: nowrap; direction: ltr; pointer-events: none; user-select: none;
+  font-family: "Bodoni Moda", serif; font-style: italic; font-size: clamp(3rem, 12vw, 11rem); line-height: .9; color: transparent; -webkit-text-stroke: 1px rgb(255 255 255 / .1);
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent); mask-image: linear-gradient(to bottom, #000 40%, transparent); }
+.ft-bottom { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 20px; padding-left: 76px; border-top: 1px solid rgb(255 255 255 / .14); font-size: 12px; color: rgb(255 255 255 / .6); }
+.ft-bottom a:hover { color: #fff; }
+
 /* ---------- لوگوی برند ----------
    فایل‌های assets/brand به‌صورت ماسک استفاده می‌شوند؛ رنگ لوگو همان currentColor والد است
    تا در حالت روشن/تیره و روی گرادیان خودش هماهنگ شود. هنگام hover یک درخشش از رویش می‌گذرد. */
