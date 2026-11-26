@@ -327,6 +327,10 @@
         });
       });
     });
+    // لینک مستقیم به یک دسته: booking.html#hair
+    var want = location.hash.slice(1);
+    var hit = want && chips.filter(function (c) { return c.dataset.cat === want; })[0];
+    if (hit) hit.click();
   });
 
   /* ---------- کشوها (منو، سبد) ---------- */
@@ -545,6 +549,32 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(track);
     else visible = true;
     restart();
+  });
+
+  /* ---------- درباره: ردیف فعال عکس طاق را عوض می‌کند ---------- */
+  $$('[data-ab]').forEach(function (box) {
+    var rows = $$('[data-ab-row]', box), imgs = $$('[data-ab-img]', box);
+    function on(i) {
+      rows.forEach(function (r) { r.classList.toggle('is-on', r.dataset.abRow === i); });
+      imgs.forEach(function (m) { m.classList.toggle('is-on', m.dataset.abImg === i); });
+    }
+    rows.forEach(function (r) {
+      r.addEventListener('mouseenter', function () { on(r.dataset.abRow); });
+      r.addEventListener('focus', function () { on(r.dataset.abRow); });
+    });
+  });
+
+  /* ---------- منوی قیمت: ردیف فعال عکس طاق وسط را عوض می‌کند ---------- */
+  $$('[data-mn]').forEach(function (box) {
+    var rows = $$('[data-mn-row]', box), imgs = $$('[data-mn-img]', box);
+    function on(i) {
+      rows.forEach(function (r) { r.classList.toggle('is-on', r.dataset.mnRow === i); });
+      imgs.forEach(function (m) { m.classList.toggle('is-on', m.dataset.mnImg === i); });
+    }
+    rows.forEach(function (r) {
+      r.addEventListener('mouseenter', function () { on(r.dataset.mnRow); });
+      r.addEventListener('focus', function () { on(r.dataset.mnRow); });
+    });
   });
 
   /* ---------- چرخش متن (نکته‌ها) ---------- */

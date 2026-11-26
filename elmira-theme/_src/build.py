@@ -256,23 +256,23 @@ def expand(m):
     return COMPONENTS[name](*[a.strip() for a in args.split("|")])
 
 
-# تصویر، آیکون، کارت شیشه‌ای و دکمهٔ هیروی هر صفحهٔ داخلی
-# (عکس اصلی، عکس گرد، آیکون، تیتر کارت، زیرنویس کارت، دکمه: (متن، لینک، رزرو؟) یا None)
+# تصویر، آیکون و کارت شیشه‌ای هیروی هر صفحهٔ داخلی، و دکمهٔ اصلی آن
+# (عکس اصلی، عکس گرد، آیکون، تیتر کارت، زیرنویس کارت، دکمه: (متن، زیرمتن، لینک، رزرو؟) یا None)
 PAGE_VISUAL = {
-    "about":          ("mirror",          "p_bun",       "ph-heart",           "از ۲۰۲۴ کنار شما",    "سالن · فروشگاه · آموزشگاه", ("رزرو نوبت", "#", True)),
-    "academy":        ("brushes",         "eye_makeup",  "ph-graduation-cap",  "کلاس‌های حضوری",      "تمرین روی مدل واقعی",       ("مشاوره و ثبت‌نام", "enroll.html", False)),
+    "about":          ("mirror",          "p_bun",       "ph-heart",           "از ۲۰۲۴ کنار شما",    "سالن · فروشگاه · آموزشگاه", ("رزرو نوبت آنلاین", "خدمت، کارشناس و ساعت را انتخاب کنید", "#", True)),
+    "academy":        ("brushes",         "eye_makeup",  "ph-graduation-cap",  "کلاس‌های حضوری",      "تمرین روی مدل واقعی",       None),
     "account":        ("skinglow",        "cream",       "ph-user-circle",     "پنل کاربری",          "سفارش‌ها و دوره‌ها",         None),
     "blog":           ("oil",             "dropper",     "ph-book-open-text",  "مجلهٔ زیبایی",        "نکته از کارشناس‌های سالن",   None),
     "blog-single":    ("facial",          "cream_swipe", "ph-pen-nib",         "نوشتهٔ کارشناس سالن", "مراقبت پوست",               None),
-    "booking":        ("balayage",        "nailart",     "ph-scissors",        "مو، پوست و ناخن",     "رزرو آنلاین نوبت",          ("رزرو نوبت", "#", True)),
+    "booking":        ("balayage",        "nailart",     "ph-scissors",        "مو، پوست و ناخن",     "رزرو آنلاین نوبت",          ("رزرو نوبت آنلاین", "خدمت، کارشناس و ساعت را انتخاب کنید", "#", True)),
     "cart":           ("cosmetics",       "green_jars",  "ph-truck",           "ارسال رایگان",        "برای خرید بالای ۱ میلیون تومان", None),
     "checkout":       ("cream",           "serum",       "ph-lock-key",        "پرداخت امن",          "درگاه بانکی",               None),
     "contact":        ("interior_chairs", "mirror",      "ph-clock",           "شنبه تا چهارشنبه",    "۹ صبح تا ۸ شب",             None),
-    "course-single":  ("face_makeup",     "brushes",     "ph-calendar-check",  "۱۲ جلسهٔ حضوری",      "تمرین روی مدل واقعی",       ("ثبت‌نام در دوره", "enroll.html", False)),
+    "course-single":  ("face_makeup",     "brushes",     "ph-calendar-check",  "۱۲ جلسهٔ حضوری",      "تمرین روی مدل واقعی",       ("ثبت‌نام در دوره", "ثبت‌نام آنلاین در سه مرحله", "enroll.html", False)),
     "enroll":         ("palette",         "brushes",     "ph-certificate",     "ثبت‌نام آنلاین",      "در سه مرحلهٔ کوتاه",        None),
-    "gallery":        ("curly_pink",      "redhair",     "ph-images",          "نمونه‌کار واقعی",     "از کار روزانهٔ سالن",        ("رزرو نوبت", "#", True)),
+    "gallery":        ("curly_pink",      "redhair",     "ph-images",          "نمونه‌کار واقعی",     "از کار روزانهٔ سالن",        ("رزرو نوبت آنلاین", "خدمت، کارشناس و ساعت را انتخاب کنید", "#", True)),
     "product-single": ("serum",           "dropper",     "ph-seal-check",      "انتخاب کارشناس",      "همان محصول سالن",           None),
-    "service-single": ("eye_makeup",      "face_makeup", "ph-sparkle",         "میکاپ عروس",          "با مشاورهٔ پیش از مراسم",    ("رزرو همین خدمت", "#", True)),
+    "service-single": ("eye_makeup",      "face_makeup", "ph-sparkle",         "میکاپ عروس",          "با مشاورهٔ پیش از مراسم",    ("رزرو همین خدمت", "مشاوره، تست و اجرای روز مراسم", "#", True)),
     "shop":           ("green_jars",      "serum",       "ph-storefront",      "محصولات منتخب",       "همان‌هایی که سالن استفاده می‌کند", None),
 }
 
@@ -286,44 +286,37 @@ def page_hero(h, slug=""):
         if href:
             parts.append(f'<a href="{href}" class="link-u">{label}</a>')
         else:
-            parts.append(f'<span aria-current="page" class="text-white">{label}</span>')
-    outline = h.get("outline", "")
-    sub = f'<p class="mt-5 max-w-xl text-white/75 leading-8" data-reveal="up" style="--d:3">{h["sub"]}</p>' if h.get("sub") else ""
-
+            parts.append(f'<span aria-current="page">{label}</span>')
+    sub = f'<p class="ph2-sub" data-reveal="up" style="--d:3">{h["sub"]}</p>' if h.get("sub") else ""
     vis = PAGE_VISUAL.get(slug)
-    visual, cta = "", ""
+    photo, cta = "", ""
     if vis:
         main, orb, icon, chip_t, chip_s, action = vis
         if action:
-            label, href, booking = action
-            attr = ' data-booking' if booking else ''
-            cta = f"""<div class="flex flex-wrap items-center gap-x-8 gap-y-4 mt-8" data-reveal="up" style="--d:4">
-      <a href="{href}"{attr} class="btn btn-blush" data-magnetic>{label} <i class="ph-light ph-arrow-up-left" aria-hidden="true"></i></a>
-      <a href="contact.html" class="hero-link"><span class="hero-link-icon"><i class="ph-light ph-phone" aria-hidden="true"></i></span><span class="hero-link-text">مشاوره و تماس</span></a>
-    </div>"""
-        visual = f"""
-    <div class="ph-visual" data-reveal="up" style="--d:2" aria-hidden="true">
-      <span class="ph-arch-line"></span>
-      <div class="ph-arch"><img src="@@{main},700,875@@" alt="" width="700" height="875" fetchpriority="high"></div>
-      <div class="badge ph-badge text-white/80 [&>.logo-mark]:text-blush"><svg class="badge-spin" viewBox="0 0 200 200"><defs><path id="phb" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><text><textPath href="#phb" textLength="440">ELMIRA AZMOUN • WHERE GRACE FINDS ITS REFLECTION •</textPath></text></svg><span class="logo-mark"></span></div>
-      <span class="ph-orb"><svg class="hero-orb-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg><img src="@@{orb},200,200@@" alt="" width="200" height="200" loading="lazy"></span>
-      <div class="hero-chip ph-chip"><span class="salon-chip-icon"><i class="ph-light {icon}"></i></span><div class="leading-tight"><b class="block text-sm">{chip_t}</b><small class="text-white/65 text-[11px]">{chip_s}</small></div></div>
-      <i class="ph-fill ph-sparkle hero-twinkle" style="--t:0;top:4%;right:2%"></i>
-      <i class="ph-fill ph-sparkle hero-twinkle" style="--t:1;bottom:22%;right:-2%;font-size:15px"></i>
+            label, small, href, booking = action
+            attr = " data-booking" if booking else ""
+            cta = f"""<div class="bh-actions ph2-actions" data-reveal="up" style="--d:4">
+        <a href="{href}"{attr} class="bh-book" data-magnetic><span class="bh-book-text"><b>{label}</b><small>{small}</small></span><span class="bh-book-ic" aria-hidden="true"><i class="ph-light ph-arrow-up-left"></i></span></a>
+        <a href="contact.html" class="bh-ask"><span class="bh-ask-ic" aria-hidden="true"><i class="ph-light ph-chat-circle-text"></i></span><span><b>مشاوره و تماس</b><small>پیش از نوبت یا ثبت‌نام بپرسید</small></span></a>
+      </div>"""
+        photo = f"""
+    <div class="ph2-photo" data-reveal="up" style="--d:2" aria-hidden="true">
+      <img src="@@{main},760,900@@" alt="" width="760" height="900" fetchpriority="high">
+      <span class="ph2-orb"><svg class="hero-orb-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg><img src="@@{orb},200,200@@" alt="" width="200" height="200" loading="lazy"></span>
+      <span class="ph2-chip"><span class="ph2-chip-ic"><i class="ph-light {icon}"></i></span><span><b>{chip_t}</b><small>{chip_s}</small></span></span>
     </div>"""
     return f"""
-<section class="grad spotlight page-hero{' has-visual' if vis else ''}" data-hero>
-  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="pattern-makeup" aria-hidden="true"></div>
-  <span class="outline-text font-display absolute -bottom-6 md:-bottom-12 left-2 md:left-8 text-[26vw] md:text-[15rem] leading-none pointer-events-none select-none" aria-hidden="true" data-parallax="-.12">{outline}</span>
-  <div class="wrap relative ph-grid">
-    <div class="ph-text">
+<section class="ph2" data-hero>
+  <div class="bh-pattern" aria-hidden="true"></div>
+  <div class="wrap ph2-grid{' has-visual' if vis else ''}">
+    <div class="ph2-main">
+      <span class="logo-mark ph2-watermark" aria-hidden="true"></span>
       <nav class="crumbs ph-crumbs" aria-label="مسیر صفحه" data-reveal="up">{''.join(parts)}</nav>
-      <h1 class="font-display text-5xl md:text-7xl leading-[1.05] mt-6" data-split>{h['title']}</h1>
+      <h1 class="ph2-title" data-split>{h['title']}</h1>
       {sub}
       {h.get('extra', '')}
       {cta}
-    </div>{visual}
+    </div>{photo}
   </div>
 </section>
 """
